@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+#PBS -l nodes=1:ppn=8
+#PBS -q fisica
+#
+WORKDIR=/fisica/gtellez/gamma4-6/any-gamma/generic-parallel
+cd $WORKDIR
+for n in 2 3 4 5 6 7 8 9 10 11 12 13 14 ; do
+./ocp -b 100000 -t 48 --model 4 -i ../binaryfiles/bosons-n${n}.bin -p 10 --compute-coefs --use-arprec >> res/soft_cyl_resultsG4_W10.txt ;
+done 

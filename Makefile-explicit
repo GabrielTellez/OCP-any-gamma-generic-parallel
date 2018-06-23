@@ -1,0 +1,19 @@
+OBJECTS=cresults.o partition.o textslice.o dispatch_partitions_binaryblock.o process_options.o softdisk_functions.o
+all:	$(OBJECTS) checksum-tbbparallel
+clean:
+	rm $(OBJECTS) checksum-tbbparallel checksum-tbbparallel.o
+cresults.o: cresults.h cresults.cpp
+	g++ -c cresults.cpp -o cresults.o
+partition.o: partition.h partition.cpp
+	g++ -c partition.cpp -o partition.o
+textslice.o: textslice.h textslice.cpp
+	g++ -c textslice.cpp -o textslice.o
+dispatch_partitions_binaryblock.o: dispatch_partitions_binaryblock.h dispatch_partitions_binaryblock.cpp
+	g++ -c dispatch_partitions_binaryblock.cpp -o dispatch_partitions_binaryblock.o
+process_options.o: process_options.h process_options.cpp
+	g++ -c process_options.cpp -o process_options.o
+checksum-tbbparallel.o: checksum-tbbparallel.cpp
+	g++ -c checksum-tbbparallel.cpp -o checksum-tbbparallel.o
+checksum-tbbparallel: checksum-tbbparallel.o $(OBJECTS)
+	g++ checksum-tbbparallel.o $(OBJECTS) -o checksum-tbbparallel -ltbb -larprec
+

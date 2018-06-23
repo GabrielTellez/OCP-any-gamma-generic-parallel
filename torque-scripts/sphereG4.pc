@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+#PBS -l nodes=1:ppn=8
+#PBS -q fisica
+#
+#source ~/.bash_profile
+uname -a
+echo $LIBRARY_PATH
+ls /fisica/gtellez/lib
+WORKDIR=/fisica/gtellez/gamma4-6/any-gamma/generic-parallel
+cd $WORKDIR
+for n in 2 3 4 5 6 7 8 9 10 11 12 13 14 ; do
+./ocp -b 10000 -t 48 --model 2 -i ../binaryfiles/bosons-n${n}.bin >> res/sphere_resultsG4.txt ;
+done

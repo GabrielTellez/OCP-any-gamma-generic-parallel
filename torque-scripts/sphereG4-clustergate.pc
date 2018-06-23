@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+#PBS -q batch
+#PBS -l nodes=1:ppn=7
+#PBS -N ocp_sphere_G4
+#
+uname -a
+WORKDIR=$HOME/run/ocp
+OCP_PROG=$WORKDIR/bin/ocp
+OCP_RESDIR=$WORKDIR/res
+OCP_RES=$OCP_RESDIR/sphere_resultsG4.txt 
+OCP_BINFILES=$WORKDIR/binaryfiles
+cd $WORKDIR
+for n in 2 3 4 5 6 7 8 9  ; do
+$OCP_PROG -b 10000 -t 48 --model 2 -i $OCP_BINFILES/gamma2_n${n}.bin >> $OCP_RES  ;
+done
